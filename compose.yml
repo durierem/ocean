@@ -1,0 +1,21 @@
+x-ruby: &ruby
+  image: ruby
+  working_dir: /opt/cwd
+  volumes:
+    - .:/opt/cwd
+    - gems:/usr/local/bundle
+  profiles:
+    - ocean
+  user: ${UID}:${GID}
+
+services:
+  ruby:
+    <<: *ruby
+    entrypoint: ruby
+
+  bundle:
+    <<: *ruby
+    entrypoint: bundle
+
+volumes:
+  gems:
