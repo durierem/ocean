@@ -51,21 +51,21 @@ dcr rails <command>
 ```
 
 But I was wondering if I could go further and just type in `rails` and it would
-automatically run Rails in a Docker container if I was in a directorycontaining
+automatically run Rails in a Docker container if I was in a directory containing
 the appropriate Docker Compose file. Ocean is the anwser to that question.
 
 ## 🤔 How does it work?
 
 Ocean sets up shims for your services in `~/.ocean/shims`. By prepending this directory to the PATH,
-Ocean intercepts the command execution, determines if there is a Compose file to be used and exec
-the command either via Docker if there is a Compose file in the current directory with the
-appropriate service defined or via the first executable it finds in the rest of the PATH.
+Ocean intercepts the command execution, determines if there is a Compose file in the current
+directory with the appropriate service defined and either runs the service or finds the first
+matching executable in the remaining of the PATH.
 
 ## 🔨 Installation & setup
 
-First, you'll need a Ruby interpreter. If you haven't already, the Ruby version
-offered via your package manager of choice should do the job. For Debian and derivatives:
-
+Ocean is writter in Ruby, so you'll need a Ruby interpreter. If you don't have one already,
+the Ruby version offered via your package manager of choice should do the job.
+For Debian and derivatives:
 ```sh
 sudo apt install ruby
 ```
@@ -83,14 +83,14 @@ Then, initialize Ocean with:
 ocean init
 ```
 
-**And finally, add `~/.ocean/shims` to your PATH environement variable**
+**IMPORTANT MANUAL STEP: finally, add `~/.ocean/shims` to your PATH environement variable**
 
 Now you're ready to take the sea:
 ```sh
 ocean up serviceA serviceB
+serviceA
+serviceB <command>
 ```
-
-Now `serviceA` and `serviceB` can be invoked directly!
 
 In order to stop shimming:
 ```sh
@@ -99,12 +99,13 @@ ocean down serviceA
 
 ## ⚠️ Limits & considerations
 
-As its current POC state, there's a few things to point out:
+Ocean is currently in a POC state, there's a few things to point out:
 - Shims are global, meaning that `which <command>` returns the shim path whether you're in a directory that contains a Compose file or not
 - Ruby is not the speediest language, depending on your machine, expect up to 100ms of delay for commands to start
 - The Compose file must be named "docker-compose.yml"
 - It is not shell aware, meaning that, among other things, the PATH must be manually modified and  if the native command is not found, you get a Ruby error instead of your shell's traditional "command not found"
 - The feature set is limited
+- Edge cases and bugs are expected
 
 ## 💭 Footnotes
 
@@ -115,7 +116,7 @@ article "Ruby on Whales"](https://evilmartians.com/chronicles/ruby-on-whales-doc
 that exposes and digs deep into how to build such setups.
 
 It ends up introducing [dip](https://github.com/bibendi/dip) which fills a role similar to Ocean
-whilst being far more mature and production ready.
+whilst being far more mature and production ready but requires an additional configuration file.
 
 These are the sources of inspiration behind Ocean.
 
