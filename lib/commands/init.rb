@@ -49,13 +49,12 @@ module Ocean
           compose = File.join(Dir.pwd, 'docker-compose.yml')
 
 
-
           if File.exist?(compose) && YAML.parse_file(compose).to_ruby.dig('services', program)
             exec "docker compose -f \#{compose} run --rm --service-ports \#{program} \#{args}"
           else
             path_without_ocean = ENV['PATH']
                                 .split(File::PATH_SEPARATOR)
-                                .filter { |path| !path.include?('obin') }
+                                .filter { |path| !path.include?('ocean/shims') }
                                 .join(File::PATH_SEPARATOR)
             bin = find_executable_in_path(program, path_without_ocean)
 
