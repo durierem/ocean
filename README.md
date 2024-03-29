@@ -75,7 +75,7 @@ Clone the repo, build and install the gem:
 git clone https://github.com/durierem/ocean
 cd ocean
 gem build ocean.gemspec
-gem install ocean-cli-0.1.0.gem
+gem install ocean-cli-0.2.0.gem
 ```
 
 Then, initialize Ocean with:
@@ -91,6 +91,12 @@ ocean up serviceA serviceB
 serviceA
 serviceB <command>
 ```
+
+To see which services are currently shimmed:
+```sh
+ocean ls
+```
+
 
 In order to stop shimming:
 ```sh

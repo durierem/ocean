@@ -48,7 +48,6 @@ module Ocean
           args = ARGV.join(' ')
           compose = File.join(Dir.pwd, 'docker-compose.yml')
 
-
           if File.exist?(compose) && YAML.parse_file(compose).to_ruby.dig('services', program)
             exec "docker compose -f \#{compose} run --rm --service-ports \#{program} \#{args}"
           else

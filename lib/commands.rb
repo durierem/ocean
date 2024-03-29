@@ -4,6 +4,7 @@ require_relative 'commands/version'
 require_relative 'commands/init'
 require_relative 'commands/up'
 require_relative 'commands/down'
+require_relative 'commands/ls'
 
 module Ocean
   module Commands
@@ -13,5 +14,6 @@ module Ocean
     register 'init', Init
     register 'up', Up
     register 'down', Down
+    register 'ls', Ls
   end
 end
