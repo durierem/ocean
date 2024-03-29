@@ -15,6 +15,7 @@ module Ocean
       def call(services: [], **)
         services.each do |service|
           shim = File.join(@shims_path, service)
+          next if File.exist?(shim)
           FileUtils.ln_s(@canon, shim)
         end
       end
