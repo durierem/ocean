@@ -14,6 +14,6 @@ module Ocean
     register 'init', Init
     register 'up', Up
     register 'down', Down
-    register 'ls', Ls
+    register 'ls', Ls, aliases: ['list']
   end
 end
