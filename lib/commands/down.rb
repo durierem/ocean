@@ -3,7 +3,7 @@
 module Ocean
   module Commands
     class Down < Dry::CLI::Command
-      desc 'Remove shims for the current compose'
+      desc 'Unset shims for the specified services'
       argument :services, type: :array, required: true, desc: 'The compose services to unshim'
 
       def initialize

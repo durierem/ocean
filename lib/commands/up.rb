@@ -3,7 +3,7 @@
 module Ocean
   module Commands
     class Up < Dry::CLI::Command
-      desc 'Set up shims for the current compose'
+      desc 'Set up shims for the specified services'
       argument :services, type: :array, required: true, desc: 'The compose services to shim'
 
       def initialize
